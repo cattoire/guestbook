@@ -1,0 +1,89 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: guestbook-gbapp-app-frontend
+  labels:
+    app: "gbapp"
+spec:
+  type: contains
+  source:
+    kind: Application
+    name: guestbook-gbapp
+  destination:
+    kind: Deployable
+    name: guestbook-gbapp-frontend
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: guestbook-gbapp-app-redismaster
+  labels:
+    app: "gbapp"
+spec:
+  type: contains
+  source:
+    kind: Application
+    name: guestbook-gbapp
+  destination:
+    kind: Deployable
+    name: guestbook-gbapp-redismaster
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: guestbook-gbapp-app-redisslave
+  labels:
+    app: "gbapp"
+spec:
+  type: contains
+  source:
+    kind: Application
+    name: guestbook-gbapp
+  destination:
+    kind: Deployable
+    name: guestbook-gbapp-redisslave
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: guestbook-gbapp-frontend-redismaster
+  labels:
+    app: "gbapp"
+spec:
+  type: usesCreated
+  source:
+    kind: Deployable
+    name: guestbook-gbapp-frontend
+  destination:
+    kind: Deployable
+    name: guestbook-gbapp-redismaster
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: guestbook-gbapp-redismaster-redisslave
+  labels:
+    app: "gbapp"
+spec:
+  type: usesCreated
+  source:
+    kind: Deployable
+    name: guestbook-gbapp-redismaster
+  destination:
+    kind: Deployable
+    name: guestbook-gbapp-redisslave
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: guestbook-gbapp-redisslave-frontend
+  labels:
+    app: "gbapp"
+spec:
+  type: usesCreated
+  source:
+    kind: Deployable
+    name: guestbook-gbapp-redisslave
+  destination:
+    kind: Deployable
+    name: guestbook-gbapp-frontend

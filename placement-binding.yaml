@@ -1,0 +1,21 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: guestbook-gbapp
+  labels:
+    app: "gbapp"
+    servicekind: CacheService
+placementRef:
+  apiGroup: mcm.ibm.com
+  kind: PlacementPolicy
+  name: guestbook-gbapp
+subjects:
+- apiGroup: mcm.ibm.com
+  kind: Deployable
+  name: guestbook-gbapp-frontend
+- apiGroup: mcm.ibm.com
+  kind: Deployable
+  name: guestbook-gbapp-redismaster
+- apiGroup: mcm.ibm.com
+  kind: Deployable
+  name: guestbook-gbapp-redisslave

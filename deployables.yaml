@@ -1,0 +1,41 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: guestbook-gbapp-frontend
+  labels:
+    app: "gbapp"
+    servicekind: ApplicationService
+spec:
+  deployer:
+    kind: helm
+    helm:
+      chartURL: https://raw.githubusercontent.com/ibm-cloud-architecture/kubernetes-multicloud-management/v312/demos/guestbook/chart-packages/gbf-0.1.0.tgz
+      namespace: default
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: guestbook-gbapp-redismaster
+  labels:
+    app: "gbapp"
+    servicekind: CacheService
+spec:
+  deployer:
+    kind: helm
+    helm:
+      chartURL: https://raw.githubusercontent.com/ibm-cloud-architecture/kubernetes-multicloud-management/v312/demos/guestbook/chart-packages/gbrm-0.1.0.tgz
+      namespace: default
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: guestbook-gbapp-redisslave
+  labels:
+    app: "gbapp"
+    servicekind: CacheService
+spec:
+  deployer:
+    kind: helm
+    helm:
+      chartURL: https://raw.githubusercontent.com/ibm-cloud-architecture/kubernetes-multicloud-management/v312/demos/guestbook/chart-packages/gbrs-0.1.0.tgz
+      namespace: default
